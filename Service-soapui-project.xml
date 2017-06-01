@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="11fffdb7-6f57-4d05-9f97-4c9061e846cf" activeEnvironment="Default" name="Service" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="1388bed5-8a4c-44f9-8703-020c7e8107b0" wsaVersion="NONE" name="PackageBinding" type="wsdl" bindingName="{http://www.ttu.ee/idu0075/2015/ws/package}PackageBinding" soapVersion="1_1" anonymous="optional" definition="http://ks.local:8080/PackageWebApplication2/PackageService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://ks.local:8080/PackageWebApplication2/PackageService?wsdl"><con:part><con:url>http://ks.local:8080/PackageWebApplication2/PackageService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/2015/ws/package">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ttu.ee/idu0075/2015/ws/package" elementFormDefault="qualified">
+      <xs:complexType name="memberType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="firstName" type="xs:string"/>
+          <xs:element name="lastName" type="xs:string"/>
+          <xs:element name="requestCode" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="packageMemberType">
+        <xs:sequence>
+          <xs:element name="member" type="tns:memberType"/>
+          <xs:element name="quantity" type="xs:integer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="packageMemberListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="packageMember" type="tns:packageMemberType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="packageType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="monthPrice" type="xs:double"/>
+          <xs:element name="requestCode" type="xs:string"/>
+          <xs:element name="packageMemberList" type="tns:packageMemberListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getMemberRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMemberResponse" type="tns:memberType"/>
+      <xs:element name="addMemberRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="requestCode" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addMemberResponse" type="tns:memberType"/>
+      <xs:element name="getMemberListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMemberListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="member" type="tns:memberType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPackageRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPackageResponse" type="tns:packageType"/>
+      <xs:element name="addPackageRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="monthPrice" type="xs:double"/>
+            <xs:element name="requestCode" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addPackageResponse" type="tns:packageType"/>
+      <xs:element name="getPackageListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="minPrice" type="xs:double"/>
+            <xs:element name="maxPrice" type="xs:double"/>
+            <xs:element minOccurs="0" name="hasRelatedMembers">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="jah|ei"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPackageListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="package" type="tns:packageType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPackageMemberListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="packageId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPackageMemberListResponse" type="tns:packageMemberListType"/>
+      <xs:element name="addPackageMemberRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="packageId" type="xs:integer"/>
+            <xs:element name="memberId" type="xs:integer"/>
+            <xs:element name="quantity" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addPackageMemberResponse" type="tns:packageMemberType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getMemberMessageRequest">
+    <wsdl:part name="parameter" element="tns:getMemberRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getMemberMessageResponse">
+    <wsdl:part name="parameter" element="tns:getMemberResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addMemberMessageRequest">
+    <wsdl:part name="parameter" element="tns:addMemberRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addMemberMessageResponse">
+    <wsdl:part name="parameter" element="tns:addMemberResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getMemberListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getMemberListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getMemberListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getMemberListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getPackageMessageRequest">
+    <wsdl:part name="parameter" element="tns:getPackageRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getPackageMessageResponse">
+    <wsdl:part name="parameter" element="tns:getPackageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addPackageMessageRequest">
+    <wsdl:part name="parameter" element="tns:addPackageRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addPackageMessageResponse">
+    <wsdl:part name="parameter" element="tns:addPackageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getPackageListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getPackageListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getPackageListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getPackageListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getPackageMemberListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getPackageMemberListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getPackageMemberListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getPackageMemberListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addPackageMemberMessageRequest">
+    <wsdl:part name="parameter" element="tns:addPackageMemberRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addPackageMemberMessageResponse">
+    <wsdl:part name="parameter" element="tns:addPackageMemberResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="PackagePortType">
+    <wsdl:operation name="getMember">
+      <wsdl:input message="tns:getMemberMessageRequest"/>
+      <wsdl:output message="tns:getMemberMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addMember">
+      <wsdl:input message="tns:addMemberMessageRequest"/>
+      <wsdl:output message="tns:addMemberMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getMemberList">
+      <wsdl:input message="tns:getMemberListMessageRequest"/>
+      <wsdl:output message="tns:getMemberListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getPackage">
+      <wsdl:input message="tns:getPackageMessageRequest"/>
+      <wsdl:output message="tns:getPackageMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addPackage">
+      <wsdl:input message="tns:addPackageMessageRequest"/>
+      <wsdl:output message="tns:addPackageMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getPackageList">
+      <wsdl:input message="tns:getPackageListMessageRequest"/>
+      <wsdl:output message="tns:getPackageListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getPackageMemberList">
+      <wsdl:input message="tns:getPackageMemberListMessageRequest"/>
+      <wsdl:output message="tns:getPackageMemberListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addPackageMember">
+      <wsdl:input message="tns:addPackageMemberMessageRequest"/>
+      <wsdl:output message="tns:addPackageMemberMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PackageBinding" type="tns:PackagePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getMember">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addMember">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMemberList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPackage">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPackage">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPackageList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPackageMemberList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPackageMember">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PackageService">
+    <wsdl:port name="PackagePort" binding="tns:PackageBinding">
+      <soap:address location="http://ks.local:8080/PackageWebApplication2/PackageService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint></con:endpoints><con:operation id="e0f5462c-c4f3-4de9-99a2-45ffecc17fdc" isOneWay="false" action="" name="addMember" bindingOperationName="addMember" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3d95bc46-06fa-40f3-b253-13f8ba885ee6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:addMemberRequest>
+         <pac:token>salajane</pac:token>
+         <pac:firstName>Mann</pac:firstName>
+         <pac:lastName>Sepp</pac:lastName>
+         <pac:requestCode>1445</pac:requestCode>
+      </pac:addMemberRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/addMemberRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d5949c6e-4db4-421d-a028-3a54e01fd140" isOneWay="false" action="" name="addPackage" bindingOperationName="addPackage" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="31aa97ee-ce84-47be-8c6a-a0fa22de6149" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:addPackageRequest>
+         <pac:token>salajane</pac:token>
+         <pac:name>Rühmatrenn</pac:name>
+         <pac:monthPrice>20</pac:monthPrice>
+         <pac:requestCode>1129</pac:requestCode>
+      </pac:addPackageRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/addPackageRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="61c81634-f868-432d-8a74-ca1a6cc31df0" isOneWay="false" action="" name="addPackageMember" bindingOperationName="addPackageMember" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bd5341bf-b9eb-4338-b89e-ca8dde11c730" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:addPackageMemberRequest>
+         <pac:token>salajane</pac:token>
+         <pac:packageId>2</pac:packageId>
+         <pac:memberId>4</pac:memberId>
+         <pac:quantity>3</pac:quantity>
+      </pac:addPackageMemberRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/addPackageMemberRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9d70e335-5995-4120-b584-387710d629f7" isOneWay="false" action="" name="getMember" bindingOperationName="getMember" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="efa55882-7b42-45ba-a31d-c5a33d6ddccd" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getMemberRequest>
+         <pac:token>salajane</pac:token>
+         <pac:id>2</pac:id>
+      </pac:getMemberRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getMemberRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="695c300c-71cf-430d-a25a-96c3ef730ccd" isOneWay="false" action="" name="getMemberList" bindingOperationName="getMemberList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3907904c-0cac-42a5-a9cd-fda42dd311f3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getMemberListRequest>
+         <pac:token>salajane</pac:token>
+      </pac:getMemberListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getMemberListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="cc5a2611-4535-43c8-907f-316d469c619c" isOneWay="false" action="" name="getPackage" bindingOperationName="getPackage" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="78e5004f-3da7-48e5-aaac-d8954398ad38" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getPackageRequest>
+         <pac:token>salajane</pac:token>
+         <pac:id>2</pac:id>
+      </pac:getPackageRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getPackageRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a1ff90be-c2c9-49ee-9229-c86346ac80bb" isOneWay="false" action="" name="getPackageList" bindingOperationName="getPackageList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5bc90fb0-31e8-4d4b-87ed-98ebce7f8de2" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getPackageListRequest>
+         <pac:token>salajane</pac:token>
+         <pac:minPrice>10</pac:minPrice>
+         <pac:maxPrice>100</pac:maxPrice>
+         <!--Optional:-->
+         <pac:hasRelatedMembers>ei</pac:hasRelatedMembers>
+      </pac:getPackageListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getPackageListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="545588f7-0271-4e32-b655-2aa98c174bcd" isOneWay="false" action="" name="getPackageMemberList" bindingOperationName="getPackageMemberList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3ac07e64-14ba-4bea-b870-d4e357fe6684" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getPackageMemberListRequest>
+         <pac:token>salajane</pac:token>
+         <pac:packageId>2</pac:packageId>
+      </pac:getPackageMemberListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getPackageMemberListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="6648f521-a665-4a73-85eb-0e3656c1de1a" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="76ec6c44-02ab-447f-99c2-b8d78de0d5c5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" id="e7343c09-317d-4a85-9878-8650f850e619" name="addMember - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>addMember</con:operation><con:request name="addMember - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="d2e326e7-2867-41bf-b8a4-1bd6ad1f3eb3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:addMemberRequest>
+         <pac:token>salajane</pac:token>
+         <pac:firstName>Mann</pac:firstName>
+         <pac:lastName>Sepp</pac:lastName>
+         <pac:requestCode>1945</pac:requestCode>
+      </pac:addMemberRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="132bee5a-4e06-4f1c-b323-7bbe272a5b6e" name="SOAP Response"/><con:assertion type="Schema Compliance" id="e2d86528-a4ec-46ff-9fd4-53f717651387" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="628c1dcf-7d94-4b7f-a133-e000b9d97405" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:addMemberResponse[1]</path><content><![CDATA[<addMemberResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <id>*</id>
+  <firstName>*</firstName>
+  <lastName>*</lastName>
+  <requestCode>*</requestCode>
+</addMemberResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/addMemberRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="f8b8794a-8937-4d69-a99b-fb6ed574d2d6" name="addPackage - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>addPackage</con:operation><con:request name="addPackage - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="54b6d68b-a679-418f-8f42-bb9517cc19e1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:addPackageRequest>
+         <pac:token>salajane</pac:token>
+         <pac:name>Rühmatrenn</pac:name>
+         <pac:monthPrice>20</pac:monthPrice>
+         <pac:requestCode>2129</pac:requestCode>
+      </pac:addPackageRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="7a07e857-b5b5-4272-8ba2-83af17dca475" name="SOAP Response"/><con:assertion type="Schema Compliance" id="aea88a69-6e4a-4713-bfb9-9fb214d5176d" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="9842f666-8be5-4d5e-93c6-0471c5451216" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:addPackageResponse[1]</path><content><![CDATA[<addPackageResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <id>*</id>
+  <name>*</name>
+  <monthPrice>*</monthPrice>
+  <requestCode>*</requestCode>
+  <packageMemberList/>
+</addPackageResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/addPackageRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="61995f87-8718-4620-8021-363763754729" name="addPackageMember - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>addPackageMember</con:operation><con:request name="addPackageMember - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="d448aa58-d7fa-4ef8-aa2f-e870a24597e9"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:addPackageMemberRequest>
+         <pac:token>salajane</pac:token>
+         <pac:packageId>2</pac:packageId>
+         <pac:memberId>4</pac:memberId>
+         <pac:quantity>3</pac:quantity>
+      </pac:addPackageMemberRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="f7b8241a-ffc2-423c-b588-8df2a51025b7" name="SOAP Response"/><con:assertion type="Schema Compliance" id="25e85444-551e-4015-a2eb-b05c098007c6" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="fa5827be-557b-4619-b79d-7f1bdf9f1e36" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:addPackageMemberResponse[1]</path><content><![CDATA[<addPackageMemberResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <member>
+    <id>*</id>
+    <firstName>*</firstName>
+    <lastName>*</lastName>
+    <requestCode>*</requestCode>
+  </member>
+  <quantity>*</quantity>
+</addPackageMemberResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/addPackageMemberRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="e6704064-8e8e-4163-84ab-9415af4a7c85" name="getMember - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>getMember</con:operation><con:request name="getMember - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="a93df72b-5756-415e-adfc-45ab0cf7b077"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getMemberRequest>
+         <pac:token>salajane</pac:token>
+         <pac:id>2</pac:id>
+      </pac:getMemberRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3574569d-684a-4ce8-a830-0d74c062dbdf" name="SOAP Response"/><con:assertion type="Schema Compliance" id="7d2b32d0-d9b9-4378-9b94-9df3de49373d" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="4e8f6e46-782a-4cd0-ba10-89dfec9fd9e0" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:getMemberResponse[1]</path><content><![CDATA[<getMemberResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <id>*</id>
+  <firstName>*</firstName>
+  <lastName>*</lastName>
+  <requestCode>*</requestCode>
+</getMemberResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getMemberRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="4761bf99-dc3c-4740-9996-284e8fa7ae99" name="getMemberList - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>getMemberList</con:operation><con:request name="getMemberList - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="35175dcf-98ba-493e-9f47-609fef3b3ec2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getMemberListRequest>
+         <pac:token>salajane</pac:token>
+      </pac:getMemberListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="0594e166-1ef6-4bd6-8820-3bd5dc2bb875" name="SOAP Response"/><con:assertion type="Schema Compliance" id="7ef7c514-e6e9-417b-893d-4bd4fdb4b363" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="95201f2d-18a0-4b37-89d6-63cd591b6e1a" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:getMemberListResponse[1]</path><content><![CDATA[<getMemberListResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <member>
+    <id>1</id>
+    <firstName>Kaur</firstName>
+    <lastName>Maur</lastName>
+    <requestCode>3245</requestCode>
+  </member>
+  <member>
+    <id>2</id>
+    <firstName>Laur</firstName>
+    <lastName>Maur</lastName>
+    <requestCode>3345</requestCode>
+  </member>
+  <member>
+    <id>3</id>
+    <firstName>Mann</firstName>
+    <lastName>Sepp</lastName>
+    <requestCode>1445</requestCode>
+  </member>
+  <member>
+    <id>4</id>
+    <firstName>Kaisa</firstName>
+    <lastName>Mets</lastName>
+    <requestCode>1345</requestCode>
+  </member>
+  <member>
+    <id>5</id>
+    <firstName>Tiina</firstName>
+    <lastName>Sarapuu</lastName>
+    <requestCode>1986</requestCode>
+  </member>
+  <member>
+    <id>6</id>
+    <firstName>Mann</firstName>
+    <lastName>Sepp</lastName>
+    <requestCode>1045</requestCode>
+  </member>
+  <member>
+    <id>7</id>
+    <firstName>Tarmo</firstName>
+    <lastName>Tamm</lastName>
+    <requestCode>0045</requestCode>
+  </member>
+  <member>
+    <id>8</id>
+    <firstName>Mann</firstName>
+    <lastName>Sepp</lastName>
+    <requestCode>1945</requestCode>
+  </member>
+</getMemberListResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getMemberListRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="0102b521-97ba-480d-a7ef-61032d8df407" name="getPackage - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>getPackage</con:operation><con:request name="getPackage - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="b6e9a01e-cdc9-4bde-b0ae-17a8a0bebb1b"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getPackageRequest>
+         <pac:token>salajane</pac:token>
+         <pac:id>5</pac:id>
+      </pac:getPackageRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2075acc2-92ff-4695-afed-667e5016f24a" name="SOAP Response"/><con:assertion type="Schema Compliance" id="257f0131-e9ab-4826-98c5-422f6416057c" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="e5a95ba9-be86-4b57-a392-4b09689b314d" name="XPath Match 1"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:getPackageResponse[1]</path><content><![CDATA[<getPackageResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <id>*</id>
+  <name>*</name>
+  <monthPrice>*</monthPrice>
+  <requestCode>*</requestCode>
+  <packageMemberList/>
+</getPackageResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getPackageRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="0c034ca5-f091-474f-9ce4-62b1b55fde33" name="getPackageList - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>getPackageList</con:operation><con:request name="getPackageList - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="81790247-2894-407b-af38-937b2fb35a56"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getPackageListRequest>
+         <pac:token>salajane</pac:token>
+         <pac:minPrice>10</pac:minPrice>
+         <pac:maxPrice>100</pac:maxPrice>
+         <!--Optional:-->
+         <pac:hasRelatedMembers>ei</pac:hasRelatedMembers>
+      </pac:getPackageListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="7e6176d9-0d82-4a76-854f-47205bdfb1aa" name="SOAP Response"/><con:assertion type="Schema Compliance" id="ba92f7b9-dfcb-414d-9e0a-82ae4d67426a" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="f16cb575-af12-4572-8eeb-7d862b1f4c2d" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:getPackageListResponse[1]</path><content><![CDATA[<getPackageListResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <package>
+    <id>3</id>
+    <name>Rühmatrennid ja saun</name>
+    <monthPrice>36.0</monthPrice>
+    <requestCode>3453</requestCode>
+    <packageMemberList/>
+  </package>
+  <package>
+    <id>4</id>
+    <name>Rühmatrenn</name>
+    <monthPrice>20.0</monthPrice>
+    <requestCode>1129</requestCode>
+    <packageMemberList/>
+  </package>
+  <package>
+    <id>5</id>
+    <name>Rühmatrennid ja saun</name>
+    <monthPrice>35.0</monthPrice>
+    <requestCode>3653</requestCode>
+    <packageMemberList/>
+  </package>
+  <package>
+    <id>6</id>
+    <name>Rühmatrenn</name>
+    <monthPrice>80.0</monthPrice>
+    <requestCode>9129</requestCode>
+    <packageMemberList/>
+  </package>
+  <package>
+    <id>7</id>
+    <name>Rühmatrenn</name>
+    <monthPrice>20.0</monthPrice>
+    <requestCode>2129</requestCode>
+    <packageMemberList/>
+  </package>
+</getPackageListResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getPackageListRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="29b5f92f-dce6-4c55-aa7b-f4a450d9fad6" name="getPackageMemberList - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>PackageBinding</con:interface><con:operation>getPackageMemberList</con:operation><con:request name="getPackageMemberList - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="e3c26944-0957-411f-9f5e-981da27889aa"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ks.local:8080/PackageWebApplication2/PackageService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pac="http://www.ttu.ee/idu0075/2015/ws/package">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pac:getPackageMemberListRequest>
+         <pac:token>salajane</pac:token>
+         <pac:packageId>1</pac:packageId>
+      </pac:getPackageMemberListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="90e38e4d-ee1d-4e1d-add7-fd13f3f7ce4a" name="SOAP Response"/><con:assertion type="Schema Compliance" id="db2ecb10-123e-41f1-8df8-a79a55d9b574" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="XPath Match" id="2261e0e5-97df-4629-a24f-b23c554eb685" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2015/ws/package';
+//ns1:getPackageMemberListResponse[1]</path><content><![CDATA[<getPackageMemberListResponse xmlns="http://www.ttu.ee/idu0075/2015/ws/package" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <packageMember>
+    <member>
+      <id>*</id>
+      <firstName>*</firstName>
+      <lastName>*</lastName>
+      <requestCode>*</requestCode>
+    </member>
+    <quantity>*</quantity>
+  </packageMember>
+</getPackageMemberListResponse>]]></content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2015/ws/package/PackagePortType/getPackageMemberListRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

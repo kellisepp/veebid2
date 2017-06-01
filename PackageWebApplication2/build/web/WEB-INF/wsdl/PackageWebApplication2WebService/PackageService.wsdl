@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+	xmlns:tns="http://www.ttu.ee/idu0075/2015/ws/package" 
+	targetNamespace="http://www.ttu.ee/idu0075/2015/ws/package">
+	<wsdl:types>
+		<xs:schema  targetNamespace="http://www.ttu.ee/idu0075/2015/ws/package" elementFormDefault="qualified">
+			<xs:complexType name ="memberType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="firstName" type="xs:string"/>
+                                        <xs:element name="lastName" type="xs:string"/>
+                                        <xs:element name="requestCode" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="packageMemberType">
+				<xs:sequence>
+					<xs:element name="member" type="tns:memberType"/>
+					<xs:element name="quantity" type="xs:integer"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="packageMemberListType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="packageMember" type="tns:packageMemberType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="packageType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="monthPrice" type="xs:double"/>
+                                        <xs:element name="requestCode" type="xs:string"/>
+					<xs:element name="packageMemberList" type="tns:packageMemberListType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getMemberRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getMemberResponse" type="tns:memberType"/>
+			<xs:element name="addMemberRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="firstName" type="xs:string"/>
+                                                <xs:element name="lastName" type="xs:string"/>
+                                                 <xs:element name="requestCode" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addMemberResponse" type="tns:memberType"/>
+			<xs:element name="getMemberListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getMemberListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="member" type="tns:memberType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getPackageRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getPackageResponse" type="tns:packageType"/>
+			<xs:element name="addPackageRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="name" type="xs:string"/>
+						<xs:element name="monthPrice" type="xs:double"/>
+                                                <xs:element name="requestCode" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addPackageResponse" type="tns:packageType"/>
+			<xs:element name="getPackageListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+                                                 <xs:element name="minPrice" type="xs:double"/>
+						<xs:element name="maxPrice" type="xs:double"/>
+						<xs:element minOccurs="0" name="hasRelatedMembers">
+						  <xs:simpleType>
+							<xs:restriction base="xs:string">
+							  <xs:pattern value="jah|ei"/>
+							</xs:restriction>
+						  </xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getPackageListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="package" type="tns:packageType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getPackageMemberListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="packageId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getPackageMemberListResponse" type="tns:packageMemberListType"/>
+			<xs:element name="addPackageMemberRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="packageId" type="xs:integer"/>
+						<xs:element name="memberId" type="xs:integer"/>
+						<xs:element name="quantity" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addPackageMemberResponse" type="tns:packageMemberType"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getMemberMessageRequest">
+		<wsdl:part name="parameter" element="tns:getMemberRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getMemberMessageResponse">
+		<wsdl:part name="parameter" element="tns:getMemberResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addMemberMessageRequest">
+		<wsdl:part name="parameter" element="tns:addMemberRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addMemberMessageResponse">
+		<wsdl:part name="parameter" element="tns:addMemberResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getMemberListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getMemberListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getMemberListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getMemberListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPackageMessageRequest">
+		<wsdl:part name="parameter" element="tns:getPackageRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getPackageMessageResponse">
+		<wsdl:part name="parameter" element="tns:getPackageResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addPackageMessageRequest">
+		<wsdl:part name="parameter" element="tns:addPackageRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addPackageMessageResponse">
+		<wsdl:part name="parameter" element="tns:addPackageResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPackageListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getPackageListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getPackageListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getPackageListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPackageMemberListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getPackageMemberListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getPackageMemberListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getPackageMemberListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addPackageMemberMessageRequest">
+		<wsdl:part name="parameter" element="tns:addPackageMemberRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addPackageMemberMessageResponse">
+		<wsdl:part name="parameter" element="tns:addPackageMemberResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="PackagePortType">
+		<wsdl:operation name="getMember">
+			<wsdl:input message="tns:getMemberMessageRequest"/>
+			<wsdl:output message="tns:getMemberMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addMember">
+			<wsdl:input message="tns:addMemberMessageRequest"/>
+			<wsdl:output message="tns:addMemberMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getMemberList">
+			<wsdl:input message="tns:getMemberListMessageRequest"/>
+			<wsdl:output message="tns:getMemberListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getPackage">
+			<wsdl:input message="tns:getPackageMessageRequest"/>
+			<wsdl:output message="tns:getPackageMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addPackage">
+			<wsdl:input message="tns:addPackageMessageRequest"/>
+			<wsdl:output message="tns:addPackageMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getPackageList">
+			<wsdl:input message="tns:getPackageListMessageRequest"/>
+			<wsdl:output message="tns:getPackageListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getPackageMemberList">
+			<wsdl:input message="tns:getPackageMemberListMessageRequest"/>
+			<wsdl:output message="tns:getPackageMemberListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addPackageMember">
+			<wsdl:input message="tns:addPackageMemberMessageRequest"/>
+			<wsdl:output message="tns:addPackageMemberMessageResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PackageBinding" type="tns:PackagePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getMember">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addMember">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getMemberList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		<wsdl:operation name="getPackage">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addPackage">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPackageList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		<wsdl:operation name="getPackageMemberList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addPackageMember">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PackageService">
+		<wsdl:port name="PackagePort" binding="tns:PackageBinding">
+			<soap:address location="Empty"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
